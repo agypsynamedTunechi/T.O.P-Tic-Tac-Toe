@@ -3,61 +3,60 @@ function createPlayer(name, marker) {
 }
 
 const gameBoard = {
-    board: ["X", "X", "X",
+    board: ["", "", "",
         "", "", "",
         "", "", ""
     ]
 }
 
-const gameControl = (function () {
-    const board = gameBoard.board;
-    const player1 = createPlayer("Jon", "X");
-    const player2 = createPlayer("Snow", "O");
-    const player = [player1, player2];
-    let currentPlayer = 0;
+const player1 = createPlayer("Jon", "X");
+const player2 = createPlayer("Snow", "O");
 
-    function playerTurn(position) {
-        if (board[position] == "") {
-            board[position] = player[currentPlayer].marker;
-            console.log(`${player[currentPlayer].name} played in ${position}`)
-            console.table(board)
-            currentPlayer = (currentPlayer + 1) % 2;
-        } else {
-            console.log(`This position has already been taken`)
-        }
-
-        function getCurrentPlayer() {
-            return currentPlayer;
-        }
-
-    };
-    return{playerTurn, player}
-})()
-
-const checkWinner = function (){
-    const board = gameBoard.board;
-    // console.log(board)
-    const winningCombination = [
-        [0,1,2], [3,4,5], [6,7,8],
-        [0,3,6], [1,4,7], [2,5,8],
-        [0,4,8], [2,4,6]
-    ]
-
-    for(let comb of winningCombination){
-        const [a,b,c] = comb;
-        if(board[a] && board[a] === board[b] && board[a] === board[c]){
-            return console.log(board[a])
-        }
-    } 
-    displayWinner()
-    
+const Game = function (player1, player2) {
+    return {
+        board: gameBoard.board,
+        player: [player1, player2],
+        currentPlayer: 0,
+        playerTurn
+    }
 }
 
-function displayWinner(){
-    const winner = checkWinner();
-    if(winner === "X"){
-        return console.log(`player1 wins`)
+function playerTurn(position) {
+    if (this.board[position] == "") {
+        this.board[position] = this.player[this.currentPlayer].marker;
+        console.log(`${this.player[this.currentPlayer].name} played in ${position}`)
+        console.table(this.board)
+        this.currentPlayer = (this.currentPlayer + 1) % 2;
+    } else {
+        console.log(`This position has already been taken`)
     }
+
+     if (checkWinner(this.board)) {
+        const winner = checkWinner(this.board)
+        displayWinner(winner);
+        return;
+    }
+};
+
+const checkWinner = function (board) {
+    const winningCombination = [
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]
+    ]
+
+    for (let comb of winningCombination) {
+        const [a, b, c] = comb;
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            return board[a]
+
+        }
+    }
+
+}
+
+function displayWinner(winner) {
+    console.log(`${winner} wins!!!`)
 }
 
 
