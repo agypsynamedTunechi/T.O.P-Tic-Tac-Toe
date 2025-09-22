@@ -1,62 +1,66 @@
-function createPlayer(name, marker) {
-    return { name, marker };
+function CreatePlayer(name, marker){
+    return{name, marker};
 }
 
-const gameBoard = {
-    board: ["", "", "",
-        "", "", "",
-        "", "", ""
-    ]
-}
+const Gameboard = (function(){
+    const board = ["","","","","","","","",""];
 
-const player1 = createPlayer("Jon", "X");
-const player2 = createPlayer("Snow", "O");
+    const getBoard = ()=> [...board];
 
-const Game = function (player1, player2) {
-    return {
-        board: gameBoard.board,
-        player: [player1, player2],
-        currentPlayer: 0,
-        playerTurn
+    function setMove(position, marker){
+        if(board[position] == ""){
+            board[position] = marker;
+            console.log(getBoard()); 
+        }
     }
-}
+    return{getBoard, setMove};
+})()
 
-function playerTurn(position) {
-    if (this.board[position] == "") {
-        this.board[position] = this.player[this.currentPlayer].marker;
-        console.log(`${this.player[this.currentPlayer].name} played in ${position}`)
-        console.table(this.board)
-        this.currentPlayer = (this.currentPlayer + 1) % 2;
-    } else {
-        console.log(`This position has already been taken`)
-    }
+const Game = (function(){
+    const player1 = CreatePlayer("Jon", "X");
+    const player2 = CreatePlayer("Snow", "O");
+    let currentPlayer = player1;
 
-     if (checkWinner(this.board)) {
-        const winner = checkWinner(this.board)
-        displayWinner(winner);
-        return;
-    }
-};
+    function playerTurn(position){
+        if(Gameboard.getBoard()[position] == ""){
+            Gameboard.setMove(position, currentPlayer.marker);
+            console.log(Gameboard.getBoard());
+            switchPlayer();
+        }else{
+            console.log("This position has been taken!!!")
+        }
 
-const checkWinner = function (board) {
-    const winningCombination = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],
-        [0, 4, 8], [2, 4, 6]
-    ]
-
-    for (let comb of winningCombination) {
-        const [a, b, c] = comb;
-        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-            return board[a]
-
+        if(checkWinner(Gameboard.getBoard())){
+            const winner = checkWinner(Gameboard.board);
+            displayWinner(winner);
         }
     }
 
-}
+    function switchPlayer(){
+        currentPlayer = currentPlayer == player1 ? player2 : player1;
+    }
 
-function displayWinner(winner) {
-    console.log(`${winner} wins!!!`)
-}
+    function checkWinner(board){
+        const winningCombinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+
+        for(let comb of winningCombinations){
+            const [a,b,c] = comb;
+
+            if(board[a] && board[a] === board[b] && board[a] === board[c]){
+                return board[a];
+            }
+        }
+    }
+
+    function displayWinner(winner){
+        if(winner == 'X'){
+            console.log(`${player1.name} wins`)
+        }else if(winner == 'O')[
+            console.log(`${player2.name} wins`)
+        ]
+    }
+
+    return {playerTurn}
+})()
 
 
