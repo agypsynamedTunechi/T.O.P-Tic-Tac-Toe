@@ -3,7 +3,7 @@ function CreatePlayer(name, marker){
 }
 
 const Gameboard = (function(){
-    const board = ["O","O","X","X","X","O","O","","O"];
+    const board = ["O","O","X","X","X","O","0","","O"];
 
     const getBoard = ()=> [...board];
 
@@ -33,6 +33,9 @@ const Game = (function(){
         if(checkWinner(Gameboard.getBoard())){
             const winner = checkWinner(Gameboard.getBoard());
             displayWinner(winner);
+        }else if(!Gameboard.getBoard().includes("")){
+            const winner = "XO";
+            displayWinner(winner);
         }
     }
 
@@ -48,8 +51,6 @@ const Game = (function(){
 
             if(board[a] && board[a] === board[b] && board[a] === board[c]){
                 return board[a];
-            }else if(!board.includes("")){
-                return "XO"
             }
     } }
     
