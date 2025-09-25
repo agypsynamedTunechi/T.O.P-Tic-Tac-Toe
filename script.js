@@ -3,7 +3,7 @@ function CreatePlayer(name, marker){
 }
 
 const Gameboard = (function(){
-    const board = ["","","","","","","","",""];
+    const board = ["O","O","X","X","X","O","O","","O"];
 
     const getBoard = ()=> [...board];
 
@@ -31,7 +31,7 @@ const Game = (function(){
         }
 
         if(checkWinner(Gameboard.getBoard())){
-            const winner = checkWinner(Gameboard.board);
+            const winner = checkWinner(Gameboard.getBoard());
             displayWinner(winner);
         }
     }
@@ -48,17 +48,24 @@ const Game = (function(){
 
             if(board[a] && board[a] === board[b] && board[a] === board[c]){
                 return board[a];
+            }else if(!board.includes("")){
+                return "XO"
             }
+    } }
+    
+
+    function displayWinner(winner){
+
+        if(winner == 'X'){
+            console.log(`${player1.name} wins`)
+        }else if(winner == 'O'){
+            console.log(`${player2.name} wins`)
+        }else if(winner = "XO"){
+            console.log("draw")
         }
     }
 
-    function displayWinner(winner){
-        if(winner == 'X'){
-            console.log(`${player1.name} wins`)
-        }else if(winner == 'O')[
-            console.log(`${player2.name} wins`)
-        ]
-    }
+
 
     return {playerTurn}
 })()
