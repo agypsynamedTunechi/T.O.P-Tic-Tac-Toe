@@ -1,0 +1,145 @@
+/*
+  Josh's Custom CSS Reset
+
+
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* GENERAL STYLING */
+body {
+  font-family: "Acme", sans-serif;
+width: 100%;
+display: flex;
+position: relative;
+
+}
+
+.container{
+ display: grid;
+ grid-template-columns: 1fr 4fr;
+ grid-template-areas: 
+    "nav header"
+    "nav main"
+ ;   
+
+}
+
+svg {
+  width: 20px;
+}
+
+.img {
+  width: 40px;
+}
+
+.img2{
+    width: 60px;
+}
+
+img {
+  border-radius: 100px;
+}
+
+a{
+    text-decoration: none;
+    font-family: inherit;
+    color:var(--link-color);
+    font-weight: bold;
+}
+
+h1{
+    font-size: 1.5rem;
+}
+
+h2{
+    font-size: 1.2rem;
+}
+
+h3{
+    font-size: 1rem;
+}
+
+p{
+  font-size: .9rem;
+  color: var(--text-color);
+}
+
+span{
+  font-weight: bold;
+}
+
+/* GENERAL STYLE */
+
+body{
+    background-color:#0F0F0F;
+}
+
+h1{
+    background-color: #123458;
+    opacity: .6;
+    color: #FE7743;
+}

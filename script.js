@@ -57,9 +57,9 @@ const Game = (function(){
 
     function displayWinner(winner){
 
-        if(winner == 'X'){
+        if(winner == player1.marker){
             console.log(`${player1.name} wins`)
-        }else if(winner == 'O'){
+        }else if(winner == player2.marker){
             console.log(`${player2.name} wins`)
         }else if(winner = "XO"){
             console.log("draw")
