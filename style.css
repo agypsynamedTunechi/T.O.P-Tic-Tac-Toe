@@ -136,10 +136,43 @@ span{
 
 body{
     background-color:#0F0F0F;
+    width: 100%;
+}
+
+main{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1{
+  color: #FE7743;
+  font-size: 2rem;
+}
+
+.header{
     background-color: #123458;
     opacity: .6;
-    color: #FE7743;
+    width: 100%;
+    text-align: center;
+}
+
+.container{
+  margin-top: 2rem;
+  width: 50%;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  grid-template-columns: repeat(3, 100px);
+  gap: .5rem;
+}
+
+.cell{
+  background-color: #123458;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 25%;
 }
