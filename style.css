@@ -148,31 +148,54 @@ main{
 
 h1{
   color: #FE7743;
-  font-size: 2rem;
+  font-size: 4rem;
 }
 
 .header{
-    background-color: #123458;
+    background-color: #232D3F;
     opacity: .6;
     width: 100%;
     text-align: center;
 }
 
 .container{
-  margin-top: 7rem;
+  /* border: 2px solid red; */
+  margin-top: 5rem;
   width: 50%;
   display: grid;
   align-items: center;
   justify-content: center;
-  grid-template-columns: repeat(3, minmax(100px, 20%));
+  grid-template-columns: repeat(3, minmax(100px, 17%));
   gap: .5rem;
 }
 
 .cell{
-  background-color: #123458;
+  font-size: 4rem;
+  font-weight: 500;
+  color: white;
+
+  background-color: #232D3F;
   height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 25%;
+}
+
+.cell-active{
+  background-color: #008170;
+}
+
+.player-name{
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+}
+
+.player-name div{
+  color: #fff;
+  background-color: #232D3F;
+  padding: 5px 2rem ;
+  border-radius: 10px 100px / 70px;
 }
