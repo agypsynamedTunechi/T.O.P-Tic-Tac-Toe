@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
 /*
   Josh's Custom CSS Reset
 
@@ -147,7 +148,7 @@ main{
 }
 
 h1{
-  color: #FE7743;
+  color: #008170;
   font-size: 4rem;
 }
 
@@ -160,6 +161,7 @@ h1{
 
 .container{
   /* border: 2px solid red; */
+  font-family: "Luckiest Guy", Arial, Helvetica, sans-serif;
   margin-top: 5rem;
   width: 50%;
   display: grid;
@@ -198,4 +200,19 @@ h1{
   background-color: #232D3F;
   padding: 5px 2rem ;
   border-radius: 10px 100px / 70px;
+}
+
+.menu{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.menu button{
+  padding: 1px 30px;
+  border-radius: 50px;
+  border: none;
+  color: white;
+  background-color: #232D3F;
 }
