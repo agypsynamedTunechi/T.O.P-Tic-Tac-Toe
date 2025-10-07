@@ -3,7 +3,7 @@ function CreatePlayer(name, marker){
 }
 
 const Gameboard = (function(){
-    const board = ["O","O","X","X","X","O","0","","O"];
+    const board = ["O","O","X","X","X","O","0","","x"];
 
     const getBoard = ()=> [...board];
 
@@ -73,4 +73,25 @@ const Game = (function(){
 
 
 
+const Display = (   function(){
+    const cells = document.querySelectorAll(".cell").forEach(cell => cell.addEventListener(click, UpdateScreen));
+    const player1 = document.querySelector(".player-1");
+    const player2 = document.querySelector(".player-2");
+    const startBtn = document.querySelector(".start-btn");
+    const resetBtn = document.querySelector(".reset-btn");
 
+    const displayBoard = ()=>{
+        for(let i = 0; i < cells.length; i++){
+           cells[i].textContent = Gameboard.getBoard()[i];
+    
+        }
+    }   
+    return{displayBoard}
+})()
+
+
+function UpdateScreen(marker){
+    if(cell.textContent == ""){
+        
+    }
+}
