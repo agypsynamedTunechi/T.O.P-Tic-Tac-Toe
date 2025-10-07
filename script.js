@@ -68,13 +68,13 @@ const Game = (function(){
 
 
 
-    return {playerTurn}
+    return {playerTurn, currentPlayer}
 })()
 
 
 
 const Display = (   function(){
-    const cells = document.querySelectorAll(".cell").forEach(cell => cell.addEventListener(click, UpdateScreen));
+    const cells = document.querySelectorAll(".cell").forEach(cell => cell.addEventListener("click", UpdateScreen));
     const player1 = document.querySelector(".player-1");
     const player2 = document.querySelector(".player-2");
     const startBtn = document.querySelector(".start-btn");
@@ -91,7 +91,8 @@ const Display = (   function(){
 
 
 function UpdateScreen(marker){
-    if(cell.textContent == ""){
+    if(this.textContent == ""){
+        console.log(this.marker)
         
     }
 }
