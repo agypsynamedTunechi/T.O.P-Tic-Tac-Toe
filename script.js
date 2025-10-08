@@ -3,7 +3,7 @@ function CreatePlayer(name, marker){
 }
 
 const Gameboard = (function(){
-    const board = ["O","O","X","X","X","O","0","","x"];
+    const board = ["","","","","","","","",""];
 
     const getBoard = ()=> [...board];
 
@@ -21,15 +21,16 @@ const Game = (function(){
     const player2 = CreatePlayer("Snow", "O");
     let currentPlayer = player1;
 
+    
+
     function playerTurn(position){
-        if(Gameboard.getBoard()[position] == ""){
-            Gameboard.setMove(position, currentPlayer.marker);
-            console.log(Gameboard.getBoard());
-            switchPlayer();
+        if(Gameboard.getBoard()[position] === ""){
+        Gameboard.setMove(position, currentPlayer.marker);
+        console.log(Gameboard.getBoard());
         }else{
             console.log("This position has been taken!!!")
         }
-
+    
         if(checkWinner(Gameboard.getBoard())){
             const winner = checkWinner(Gameboard.getBoard());
             displayWinner(winner);
@@ -37,6 +38,9 @@ const Game = (function(){
             const winner = "XO";
             displayWinner(winner);
         }
+
+       switchPlayer()
+    
     }
 
     function switchPlayer(){
@@ -68,31 +72,33 @@ const Game = (function(){
 
 
 
-    return {playerTurn, currentPlayer}
+    return {playerTurn}
 })()
 
 
 
-const Display = (   function(){
-    const cells = document.querySelectorAll(".cell").forEach(cell => cell.addEventListener("click", UpdateScreen));
+const Display = (function(){
+    const cells = document.querySelectorAll(".cell");
     const player1 = document.querySelector(".player-1");
     const player2 = document.querySelector(".player-2");
     const startBtn = document.querySelector(".start-btn");
     const resetBtn = document.querySelector(".reset-btn");
 
+    cells.forEach(cell => cell.addEventListener("click", UpdateScreen))
+
     const displayBoard = ()=>{
         for(let i = 0; i < cells.length; i++){
            cells[i].textContent = Gameboard.getBoard()[i];
-    
         }
     }   
     return{displayBoard}
+
 })()
 
-
-function UpdateScreen(marker){
+function UpdateScreen(){
     if(this.textContent == ""){
-        console.log(this.marker)
+    Game.playerTurn(this.dataset.id);
+       Display.displayBoard()
         
     }
 }
