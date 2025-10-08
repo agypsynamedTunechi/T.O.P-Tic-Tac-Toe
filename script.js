@@ -99,6 +99,7 @@ function UpdateScreen(){
     if(this.textContent == ""){
     Game.playerTurn(this.dataset.id);
        Display.displayBoard()
-        
+    }else{
+        alert("This Position has been taken")
     }
 }
