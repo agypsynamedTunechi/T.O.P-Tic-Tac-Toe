@@ -192,10 +192,12 @@ h1{
   margin-top: 1rem;
   display: flex;
   justify-content: space-between;
-  width: 25%;
+  width: 300px;
+
 }
 
 .player-name div{
+  flex: 0;
   color: #fff;
   background-color: #232D3F;
   padding: 5px 2rem ;
@@ -215,4 +217,39 @@ h1{
   border: none;
   color: white;
   background-color: #232D3F;
+}
+
+
+@media (min-width: 1200px){
+
+  .header{
+    order: -1;
+    margin-bottom: 3rem;
+  }
+
+  .container{
+    order: 2;
+    margin-top: 0;
+  }
+
+  .player-name{
+    order: 3;
+  }
+
+  .menu{
+    margin: 0;
+    order: 1;
+    margin-bottom: 2rem;
+    flex-direction: row;
+    width: 27%;
+    justify-content: space-between;
+  }
+
+  .menu button{
+    padding: 1rem 3rem;
+  }
+
+  .player-name{
+    width: 27 %;
+  }
 }
