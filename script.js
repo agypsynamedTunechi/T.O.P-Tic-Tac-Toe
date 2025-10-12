@@ -21,33 +21,15 @@ const Game = (function(){
     const player2 = CreatePlayer("Snow", "O");
     let currentPlayer = player1;
 
-    
-
-    function playerTurn(position){
-        if(Gameboard.getBoard()[position] === ""){
-        Gameboard.setMove(position, currentPlayer.marker);
-        console.log(Gameboard.getBoard());
-        }else{
-            console.log("This position has been taken!!!")
-        }
-    
-        if(checkWinner(Gameboard.getBoard())){
-            const winner = checkWinner(Gameboard.getBoard());
-            displayWinner(winner);
-        }else if(!Gameboard.getBoard().includes("")){
-            const winner = "XO";
-            displayWinner(winner);
-        }
-
-       switchPlayer()
-    
-    }
-
-    function switchPlayer(){
+    const switchPlayer = ()=>{
         currentPlayer = currentPlayer == player1 ? player2 : player1;
     }
 
-    function checkWinner(board){
+    const getCurrentPlayer = ()=>{
+        return currentPlayer;
+    }
+
+    const checkWinner = (board)=>{
         const winningCombinations = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
 
         for(let comb of winningCombinations){
@@ -59,7 +41,7 @@ const Game = (function(){
     } }
     
 
-    function displayWinner(winner){
+    const displayWinner = (winner)=>{
 
         if(winner == player1.marker){
             console.log(`${player1.name} wins`)
@@ -72,9 +54,28 @@ const Game = (function(){
 
 
 
-    return {playerTurn}
+    return {switchPlayer, getCurrentPlayer, checkWinner, displayWinner}
 })()
 
+ function playerTurn(position){
+        if(Gameboard.getBoard()[position] === ""){
+        Gameboard.setMove(position, Game.getCurrentPlayer().marker);
+        console.log(Gameboard.getBoard());
+        }else{
+            console.log("This position has been taken!!!")
+        }
+    
+        if(Game.checkWinner(Gameboard.getBoard())){
+            const winner = Game.checkWinner(Gameboard.getBoard());
+            Game.displayWinner(winner);
+        }else if(!Gameboard.getBoard().includes("")){
+            const winner = "XO";
+            Game.displayWinner(winner);
+        }
+
+        Game.switchPlayer()
+       
+    }
 
 
 const Display = (function(){
@@ -96,10 +97,14 @@ const Display = (function(){
 })()
 
 function UpdateScreen(){
+    console.log(Game.getCurrentPlayer())
     if(this.textContent == ""){
-    Game.playerTurn(this.dataset.id);
-       Display.displayBoard()
+      playerTurn(this.dataset.id);
+      Display.displayBoard()
     }else{
         alert("This Position has been taken")
     }
+
+
+   
 }
