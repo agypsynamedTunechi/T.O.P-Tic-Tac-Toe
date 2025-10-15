@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,12 +8,13 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
     <main>
         <div class="header">
             <h1>TIC TAC TOE</h1>
         </div>
-        
+
         <section class="container">
             <div data-id="0" class="cell one"></div>
             <div data-id="1" class="cell two"></div>
@@ -33,15 +35,22 @@
             <button class="reset-btn">Reset</button>
         </section>
     </main>
-      <dialog id="dialog">
+    <dialog id="dialog">
         <form action="">
             <div>
-            <input type="text" required name="title" id="title" placeholder="Player 1" >
-            
+                <input type="text" required name="title" id="title" placeholder="Player 1">
+                <input type="radio" name="x-marker" id="x" value="X">
+                <label for="x">X</label>
+                <input type="radio" name="marker" id="o" value="O">
+                <label for="o">O</label>
             </div>
-            <input type="text" name="author" id="author" placeholder="Player 2" required>
-        
-            
+
+            <div>
+                <input type="text" name="author" id="author" placeholder="Player 2" required>
+               
+            </div>
+
+
             <div class="form-button">
                 <button type="submit" class="submit" value="submit">PLAY</button>
             </div>
@@ -50,4 +59,5 @@
         </form>
     </dialog>
 </body>
+
 </html>

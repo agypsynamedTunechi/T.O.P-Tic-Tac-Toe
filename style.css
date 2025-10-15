@@ -240,6 +240,7 @@ dialog{
 }
 
 form{
+  font-family: "Luckiest Guy", Arial, Helvetica, sans-serif;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -251,7 +252,7 @@ form div{
   gap: 1rem;
 }
 
-form input{
+form input[type = "text"]{
   width: 300px;
   padding: .5rem;
 }
