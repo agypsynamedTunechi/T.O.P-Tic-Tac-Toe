@@ -94,6 +94,21 @@ const Display = (function () {
     const startBtn = document.querySelector(".start-btn");
     const resetBtn = document.querySelector(".reset-btn");
     const dialog = document.querySelector("#dialog");
+    const playerOneName = document.querySelector("#player-1-name");
+    const playerTwoName = document.querySelector("#player-2-name");
+    const xRadio = document.querySelector("#x");
+    const oRadio = document.querySelector("#o");
+    const playBtn = document.querySelector(".submit");
+
+
+    // Hide board when game hasn't started
+    function showBoard(){
+        if(cells.style.visibility  == "visible"){
+            cells.style.visibility = "hidden";
+        }else{
+            cells.style.visibility = "visible"
+        }
+    }
 
 
 
@@ -107,7 +122,7 @@ const Display = (function () {
 
     });
 
-    submitBtn.addEventListener("click", (event) => {
+    playBtn.addEventListener("click", (event) => {
         if (
             titleInput.value === "" ||
             authorInput.value === "" ||
@@ -117,6 +132,7 @@ const Display = (function () {
         }
         event.preventDefault();
         dialog.close();
+        showBoard()
     });
 
 

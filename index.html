@@ -38,15 +38,19 @@
     <dialog id="dialog">
         <form action="">
             <div>
-                <input type="text" required name="title" id="title" placeholder="Player 1">
-                <input type="radio" name="x-marker" id="x" value="X">
+                <input type="text" name="player-1-name" id="player-1-name" placeholder="Player 1 name" required>
+                <div class="radio">
+                <input type="radio" name="marker" id="x" value="X">
                 <label for="x">X</label>
+                </div>
+                <div class="radio">
                 <input type="radio" name="marker" id="o" value="O">
                 <label for="o">O</label>
+                </div>
             </div>
 
             <div>
-                <input type="text" name="author" id="author" placeholder="Player 2" required>
+                <input type="text" name="player-2-name" id="player-2-name" placeholder="Player 2 name" required>
                
             </div>
 
