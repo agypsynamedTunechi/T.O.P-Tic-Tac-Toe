@@ -182,7 +182,11 @@ h1{
   justify-content: center;
   align-items: center;
   border-radius: 25%;
-  visibility: hidden;
+visibility: hidden;
+}
+
+.cell.visible{
+  visibility: visible;
 }
 
 .cell-active{
@@ -194,7 +198,12 @@ h1{
   display: flex;
   justify-content: space-between;
   width: 300px;
+  visibility: hidden;
 
+}
+
+.player-name.visible{
+  visibility: visible;
 }
 
 .player-name div{

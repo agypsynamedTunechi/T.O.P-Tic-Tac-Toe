@@ -17,8 +17,8 @@ const Gameboard = (function () {
 })()
 
 const Game = (function () {
-    const player1 = CreatePlayer("Jon", "X");
-    const player2 = CreatePlayer("Snow", "O");
+    const player1 = CreatePlayer();
+    const player2 = CreatePlayer();
     let currentPlayer = player1;
 
     const getPlayer1 = () => {
@@ -69,7 +69,6 @@ const Game = (function () {
 function playerTurn(position) {
     if (Gameboard.getBoard()[position] === "") {
         Gameboard.setMove(position, Game.getCurrentPlayer().marker);
-        console.log(Gameboard.getBoard());
     } else {
         console.log("This position has been taken!!!")
     }
@@ -94,6 +93,7 @@ const Display = (function () {
     const startBtn = document.querySelector(".start-btn");
     const resetBtn = document.querySelector(".reset-btn");
     const dialog = document.querySelector("#dialog");
+    const playerNameBoard = document.querySelector(".player-name")
     const playerOneName = document.querySelector("#player-1-name");
     const playerTwoName = document.querySelector("#player-2-name");
     const xRadio = document.querySelector("#x");
@@ -102,13 +102,6 @@ const Display = (function () {
 
 
     // Hide board when game hasn't started
-    function showBoard(){
-        if(cells.style.visibility  == "visible"){
-            cells.style.visibility = "hidden";
-        }else{
-            cells.style.visibility = "visible"
-        }
-    }
 
 
 
@@ -116,27 +109,25 @@ const Display = (function () {
         dialog.showModal();
     });
 
-    dialog.addEventListener("close", () => {
-        addBookToLibrary();
-        displayBook();
-
-    });
+    dialog.addEventListener("close", showBoard);
 
     playBtn.addEventListener("click", (event) => {
         if (
-            titleInput.value === "" ||
-            authorInput.value === "" ||
-            pagesInput.value === ""
+            playerOneName.value === "" ||
+            playerTwoName.value === ""
         ) {
             return;
         }
         event.preventDefault();
+
         dialog.close();
-        showBoard()
+        
     });
 
 
     cells.forEach(cell => cell.addEventListener("click", UpdateScreen))
+     cells.forEach(cell => cell.addEventListener("click", cellColor))
+     
     startBtn.addEventListener("click", cellColor)
     const displayBoard = () => {
         for (let i = 0; i < cells.length; i++) {
@@ -148,7 +139,7 @@ const Display = (function () {
 
 
 
-    return { displayBoard, player1, player2, }
+    return { displayBoard, player1, player2, cells, playerNameBoard}
 
 })()
 
@@ -167,20 +158,52 @@ function UpdateScreen() {
 }
 
 function cellColor() {
-    console.log(Game.getPlayer1())
+   
     if (Game.getCurrentPlayer() == Game.getPlayer1()) {
         Display.player1.style.backgroundColor = "#028391"
-        console.log(Game.getCurrentPlayer())
+ 
+        Display.cells.forEach((cell) =>{
+            if(cell.textContent == "X"){
+                cell.style.backgroundColor = "#028391";
+            }
+        });
+        
 
-        // for(let i = 0; i < cells.length; i++){
-        //     if(cells[i].textContent == Game.player1.marker){
-        //         cells[i].style.backgroundColor = "#028391"
-        //     }
-        // }
 
-
-    } else {
+    }else{
         Display.player1.style.backgroundColor = "#232D3F"
+         Display.cells.forEach((cell) =>{
+            if(cell.textContent == "X"){
+                cell.style.backgroundColor = "#232D3F";
+            }
+        });
     }
+
+    if (Game.getCurrentPlayer() == Game.getPlayer2()) {
+        Display.player2.style.backgroundColor = "#008170"
+ 
+        Display.cells.forEach((cell) =>{
+            if(cell.textContent == "O"){
+                cell.style.backgroundColor = "#008170";
+            }
+        });
+        
+
+
+    }else{
+        Display.player2.style.backgroundColor = "#232D3F"
+         Display.cells.forEach((cell) =>{
+            if(cell.textContent == "O"){
+                cell.style.backgroundColor = "#232D3F";
+            }
+        });
+    }
+
 }
+
+    function showBoard(){
+        console.log(Display.cells)
+      Display.cells.forEach(cell => cell.classList.toggle("visible"));
+      Display.playerNameBoard.classList.toggle("visible");
+    }
 
