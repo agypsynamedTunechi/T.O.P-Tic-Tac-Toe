@@ -240,7 +240,7 @@ visibility: hidden;
 
 /* FORM */
 dialog{
-  width: 50%;
+  width: 80%;
   border: none;
   border-radius: 10px;
   background-color: #232D3F;
@@ -250,6 +250,8 @@ dialog{
 }
 
 form{
+  flex: 0;
+  width: 100%;
   font-family: "Luckiest Guy", Arial, Helvetica, sans-serif;
   padding: 1rem;
   display: flex;
