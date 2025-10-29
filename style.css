@@ -194,6 +194,7 @@ visibility: hidden;
 }
 
 .player-name{
+  font-weight: 900;
   margin-top: 1rem;
   display: flex;
   justify-content: space-between;
@@ -222,7 +223,7 @@ visibility: hidden;
 }
 
 .menu button{
-  padding: 1px 30px;
+  padding: 1rem 2rem;
   border-radius: 50px;
   border: none;
   color: white;
@@ -232,6 +233,7 @@ visibility: hidden;
 
 .start-btn{
   background-color: #008170;
+  order: 1;
 }
 
 .reset-btn{
