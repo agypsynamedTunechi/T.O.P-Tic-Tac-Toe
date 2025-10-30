@@ -13,7 +13,16 @@ const Gameboard = (function () {
             console.log(getBoard());
         }
     }
-    return { getBoard, setMove };
+
+    function resetBoard() {
+        for (let i = 0; i < board.length; i++) {
+            if (board[i] !== "") {
+                board[i] = "";
+
+            }
+        }
+    }
+    return { getBoard, setMove, resetBoard };
 })()
 
 
@@ -44,6 +53,15 @@ const Display = (function () {
         }
     }
 
+    // function resetBoard (){
+    //     for(let i = 0; i < cells.length; i++){
+    //     if(cells[i].textContent !== ""){
+    //         cells[i].textContent = "";
+
+    //     }
+    //     }
+    // }
+
 
     return {
         displayBoard, player1,
@@ -58,9 +76,11 @@ const Display = (function () {
 
 })()
 
+
 const Game = function (user1, user2) {
     const player1 = user1;
     const player2 = user2;
+
 
     let currentPlayer = player1;
 
@@ -95,11 +115,11 @@ const Game = function (user1, user2) {
 
             if (board[a] && board[a] === board[b] && board[a] === board[c]) {
                 console.log(Display.cells[a].textContent);
-                        Display.cells[a].style.backgroundColor = "#008170"
-                        Display.cells[b].style.backgroundColor = "#008170"
-                        Display.cells[c].style.backgroundColor = "#008170"
-                    
-    
+                Display.cells[a].style.backgroundColor = "#008170"
+                Display.cells[b].style.backgroundColor = "#008170"
+                Display.cells[c].style.backgroundColor = "#008170"
+
+
                 return board[a];
 
             } else if (!board.includes("")) {
@@ -113,14 +133,26 @@ const Game = function (user1, user2) {
 
     const displayWinner = (winner) => {
 
+
         if (winner == player1.marker) {
             Display.playerNameBoard.textContent = `${player1.name} wins`
+
+
+
         } else if (winner == player2.marker) {
-            Display.playerNameBoard.textContent = `${player2.name} wins`
             Display.playerNameBoard.style.textAlign = "center"
+            Display.playerNameBoard.textContent = `${player2.name} wins`
+
         } else if (winner = "XO") {
             Display.playerNameBoard.textContent = `Draw`
         }
+
+        Display.playerNameBoard.style.paddingRight = "auto"
+        Display.playerNameBoard.style.color = "white"
+        Display.playerNameBoard.style.fontSize = "20px"
+        Display.playerNameBoard.style.fontFamily = '"Luckiest Guy", Arial, Helvetica, sans-serif'
+        Display.playerNameBoard.style.justifyContent = "center"
+        Display.playerNameBoard.style.backgroundColor = "#008170"
     }
 
 
@@ -146,49 +178,64 @@ const Game = function (user1, user2) {
         if (getCurrentPlayer() == getPlayer1()) {
             Display.player1.style.backgroundColor = "#028391"
 
-            Display.cells.forEach((cell) => {
-                if (cell.textContent == "X") {
-                    cell.style.backgroundColor = "#028391";
-                }
-            });
+            // Display.cells.forEach((cell) => {
+            //     if (cell.textContent == "X") {
+            //         cell.style.backgroundColor = "#028391";
+            //     }
+            // });
 
 
 
         } else {
             Display.player1.style.backgroundColor = "#232D3F"
-            Display.cells.forEach((cell) => {
-                if (cell.textContent == "X") {
-                    cell.style.backgroundColor = "#232D3F";
-                }
-            });
+
+            // Display.cells.forEach((cell) => {
+            //     if (cell.textContent == "X") {
+            //         cell.style.backgroundColor = "#232D3F";
+            //     }
+            // });
+
+
         }
 
-        if (getCurrentPlayer() == getPlayer2()) {
-            Display.player2.style.backgroundColor = "#008170"
 
-            Display.cells.forEach((cell) => {
-                if (cell.textContent == "O") {
-                    cell.style.backgroundColor = "#008170";
-                }
-            });
+        if (getCurrentPlayer() == getPlayer2()) {
+            Display.player2.style.backgroundColor = "#028391"
+
+            // Display.cells.forEach((cell) => {
+            //     if (cell.textContent == "O") {
+            //         cell.style.backgroundColor = "#028391";
+            //     }
+            // });
 
 
 
         } else {
             Display.player2.style.backgroundColor = "#232D3F"
+            // Display.cells.forEach((cell) => {
+            //     if (cell.textContent == "O") {
+            //         cell.style.backgroundColor = "#232D3F";
+            //     }
+            // });
+        }
+
+        if (checkWinner(Gameboard.getBoard())) {
+
+
             Display.cells.forEach((cell) => {
-                if (cell.textContent == "O") {
-                    cell.style.backgroundColor = "#232D3F";
+                if (cell.textContent == checkWinner(Gameboard.getBoard())) {
+                    cell.style.backgroundColor = "#008170";
                 }
             });
         }
-
     }
 
     function showBoard() {
         console.log(Display.cells)
         Display.cells.forEach(cell => cell.classList.toggle("visible"));
         Display.playerNameBoard.classList.toggle("visible");
+        Display.player1.textContent = player1.name;
+        Display.player2.textContent = player2.name;
     }
 
     function playerTurn(position) {
@@ -198,21 +245,32 @@ const Game = function (user1, user2) {
         } else {
             console.log("This position has been taken!!!")
         }
-
         if (checkWinner(Gameboard.getBoard())) {
             const winner = checkWinner(Gameboard.getBoard());
             displayWinner(winner);
-            return
         }
-         switchPlayer()
+        switchPlayer()
     }
 
     Display.dialog.addEventListener("close", showBoard);
     Display.cells.forEach(cell => cell.addEventListener("click", UpdateScreen))
     Display.cells.forEach(cell => cell.addEventListener("click", cellColor))
+    Display.resetBtn.addEventListener("click", () => {
+        Gameboard.resetBoard()
+        currentPlayer = player1
+        checkWinner(Gameboard.getBoard())
+        cellColor()
+        Display.cells.forEach((cell) => {
+            cell.style.backgroundColor = "#232D3F";
+
+        });
+        Display.displayBoard()
+        console.log(Gameboard.getBoard())
+
+    })
 
 
-    return { cellColor }
+    return { cellColor, getCurrentPlayer }
 }
 
 
@@ -233,7 +291,8 @@ Display.radios.forEach((radio) => {
 Display.playBtn.addEventListener("click", (event) => {
     if (
         Display.playerOneName.value === "" ||
-        Display.playerTwoName.value === ""
+        Display.playerTwoName.value === "" ||
+        player1marker === ""
     ) {
         return;
     }
@@ -252,13 +311,5 @@ Display.playBtn.addEventListener("click", (event) => {
     Display.dialog.close();
 
 });
-
-Display.formEl.addEventListener("submit", function (event) {
-    event.preventDefault();
-
-})
-
-
-
 
 

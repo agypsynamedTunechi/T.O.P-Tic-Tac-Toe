@@ -14,6 +14,7 @@
 
 * {
   margin: 0;
+  font-family: "Luckiest Guy", Arial, Helvetica, sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -200,7 +201,7 @@ visibility: hidden;
   justify-content: space-between;
   width: 300px;
   visibility: hidden;
-
+  text-align: center;
 }
 
 .player-name.visible{
@@ -239,6 +240,8 @@ visibility: hidden;
 .reset-btn{
   background-color: rgb(184, 3, 3);
 }
+
+
 
 /* FORM */
 dialog{
